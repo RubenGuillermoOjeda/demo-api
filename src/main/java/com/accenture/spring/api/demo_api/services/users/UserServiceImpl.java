@@ -9,7 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
-import com.accenture.spring.api.demo_api.models.User;
+import com.accenture.spring.api.demo_api.generated.model.User;
+
 
 @Service
 public class UserServiceImpl implements IUSerService {
@@ -31,7 +32,7 @@ public class UserServiceImpl implements IUSerService {
 
     @Override
     public List<User> getActiveUsers() {
-       return this.getUsers().stream().filter(user -> user.isActive).collect(Collectors.toList());
+       return this.getUsers().stream().filter(user -> user.getIsActive()).collect(Collectors.toList());
     }
 
     

@@ -2,7 +2,7 @@ package com.accenture.spring.api.demo_api.services.users;
 
 import java.util.List;
 
-import com.accenture.spring.api.demo_api.models.User;
+import com.accenture.spring.api.demo_api.generated.model.User;
 
 public interface IUSerService {
 

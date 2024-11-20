@@ -3,27 +3,25 @@ package com.accenture.spring.api.demo_api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
 
-import com.accenture.spring.api.demo_api.models.User;
+import com.accenture.spring.api.demo_api.generated.controller.UserOperationsApi;
+import com.accenture.spring.api.demo_api.generated.model.User;
 import com.accenture.spring.api.demo_api.services.users.UserServiceImpl;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import jakarta.validation.Valid;
 
-@RestController
-@RequestMapping("/api/users")
-public class UsersController {
+@Controller
+public class UsersController implements UserOperationsApi {
 
     @Autowired
     UserServiceImpl userService;
 
-    @GetMapping
-    public ResponseEntity<List<User>> getUsers(@RequestParam(defaultValue = "false", required = false) Boolean active) {
+    @Override
+    public ResponseEntity<List<User>> getUsers(@Valid Boolean active) {
         List<User> users = active ? userService.getActiveUsers() : userService.getUsers();
-        return ResponseEntity.ok(users);
+        return users.isEmpty()? new ResponseEntity<>(users, HttpStatus.NOT_FOUND): ResponseEntity.ok(users);
     }
-    
 }

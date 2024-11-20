@@ -1,0 +1,49 @@
+openapi: "3.0.2"
+info: 
+  title: Users API
+  description: API to access users
+  version: "1.0"
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: User API
+    description: User specific data.
+paths:
+  /api/users:
+    get:
+      tags:
+        - UserOperations
+      summary: Get Active Users
+      operationId: getUsers
+      parameters:
+        - name: active
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '404':
+          description: Not Found
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: Id of User
+        userName:
+          type: string
+          description: User name
+        isActive:
+          type: boolean
+          description: is the User active
