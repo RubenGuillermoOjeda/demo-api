@@ -3,7 +3,6 @@ package com.accenture.spring.api.demo_api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
@@ -22,6 +21,6 @@ public class UsersController implements UserOperationsApi {
     @Override
     public ResponseEntity<List<User>> getUsers(@Valid Boolean active) {
         List<User> users = active ? userService.getActiveUsers() : userService.getUsers();
-        return users.isEmpty()? new ResponseEntity<>(users, HttpStatus.NOT_FOUND): ResponseEntity.ok(users);
+        return ResponseEntity.ok(users);
     }
 }
