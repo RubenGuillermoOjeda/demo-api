@@ -1,4 +1,4 @@
-package com.accenture.spring.api.demo_api.controllers;
+package com.accenture.spring.api.demo_api.controllers.users;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 
 import com.accenture.spring.api.demo_api.generated.controller.UserOperationsApi;
 import com.accenture.spring.api.demo_api.generated.model.User;
-import com.accenture.spring.api.demo_api.services.users.UserServiceImpl;
+import com.accenture.spring.api.demo_api.services.users.IUSerService;
 
 import jakarta.validation.Valid;
 
@@ -16,7 +16,7 @@ import jakarta.validation.Valid;
 public class UsersController implements UserOperationsApi {
 
     @Autowired
-    UserServiceImpl userService;
+    IUSerService userService;
 
     @Override
     public ResponseEntity<List<User>> getUsers(@Valid Boolean active) {

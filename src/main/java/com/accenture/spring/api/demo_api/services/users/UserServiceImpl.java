@@ -12,8 +12,6 @@ import org.springframework.web.client.RestClient;
 
 import com.accenture.spring.api.demo_api.exceptions.NoServiceException;
 import com.accenture.spring.api.demo_api.generated.model.User;
-
-
 @Service
 public class UserServiceImpl implements IUSerService {
 
@@ -32,7 +30,7 @@ public class UserServiceImpl implements IUSerService {
             ResponseEntity<List<User>> response = restClient.get()
                     .uri(USERS_URL)
                     .retrieve()
-                    .toEntity(new ParameterizedTypeReference<>() {});
+                    .toEntity(new ParameterizedTypeReference<List<User>>() {});
             return response.getBody();
         } catch (HttpClientErrorException ex) {
            throw new NoServiceException(SERVICE_NOT_AVAILABLE, SERVICE_NAME);
